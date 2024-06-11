@@ -54,29 +54,30 @@ class TestingFunctorinator // Dr. Doofenshmirtz naming convention
 {
 public:
 
-    NMEA0183 nmea0183;
+    NMEA0183 *nmea0183;
+    TestingFunctorinator(NMEA0183* nmea0183) : nmea0183(nmea0183) {}
 
     // Now turn this mild mannered class into a functor!
     void operator () (NMEA_TEST const& item) noexcept
     {
-        nmea0183.SetSentence(item.sentence);
+        nmea0183->SetSentence(item.sentence);
 
-        if (nmea0183.Parse() != item.expected_parse_result)
+        if (nmea0183->Parse() != item.expected_parse_result)
         {
             std::string sentence;
 
-            nmea0183.GetSentence(sentence);
-            printf("Failed test %d with \"%s\"\n", item.test_number, nmea0183.ErrorMessage.c_str());
-            printf("Last Sentence Received is \"%s\"\n", nmea0183.LastSentenceIDReceived.c_str());
-            printf("Last Sentence Parsed is   \"%s\"\n\n", nmea0183.LastSentenceIDParsed.c_str());
+            nmea0183->GetSentence(sentence);
+            printf("Failed test %d with \"%s\"\n", item.test_number, nmea0183->ErrorMessage.c_str());
+            printf("Last Sentence Received is \"%s\"\n", nmea0183->LastSentenceIDReceived.c_str());
+            printf("Last Sentence Parsed is   \"%s\"\n\n", nmea0183->LastSentenceIDParsed.c_str());
         }
         else
         {
-            if (item.plain_english.empty() == false && nmea0183.PlainText.compare(item.plain_english) != 0 )
+            if (item.plain_english.empty() == false && nmea0183->PlainText.compare(item.plain_english) != 0 )
             {
                 std::string sentence;
 
-                nmea0183.GetSentence(sentence);
+                nmea0183->GetSentence(sentence);
 
                 printf("\nFailed test %d plain English test for %s", item.test_number, sentence.c_str());
             }
@@ -135,7 +136,8 @@ int main()
 
    // Now loop through the list and attempt to parse each sentence
 
-   TestingFunctorinator testerinator;
+   NMEA0183 nmea0183;
+   TestingFunctorinator testerinator(&nmea0183);
 
    std::for_each( test_sentences.cbegin(), test_sentences.cend(), testerinator );
 

@@ -266,13 +266,13 @@ int SENTENCE::Integer( int field_number ) const noexcept
    return(return_value);
 }
 
-NMEA0183_BOOLEAN SENTENCE::IsChecksumBad( int checksum_field_number ) const noexcept
+NMEA0183_BOOLEAN SENTENCE::IsChecksumBad( int ) const noexcept
 {
    /*
    ** Checksums are optional, return TRUE if an existing checksum is known to be bad
    */
 
-   auto checksum_in_sentence{ Field(checksum_field_number) };
+   auto checksum_in_sentence{ Checksum() };
 
    if ( checksum_in_sentence.empty() == true )
    {
@@ -501,6 +501,31 @@ FAA_MODE SENTENCE::FAAMode(int field_number) const noexcept
     {
         return(FAA_MODE::ModeUnknown);
     }
+}
+
+std::string_view SENTENCE::Checksum(void) const noexcept
+{
+    std::size_t index{ 1 }; // Skip over the $ at the begining of the sentence
+
+    auto const string_length{ Sentence.length() };
+
+    while (index < string_length)
+    {
+        if (Sentence[index] == '*')
+        {
+            if (index + 3 < string_length) // String has at least 3 more characters
+            {
+                if (Sentence[index + 3] == CARRIAGE_RETURN)
+                {
+                    return(std::string_view(&Sentence[index + 1], 2));
+                }
+            }
+        }
+
+        index++;
+    }
+
+    return(std::string_view());
 }
 
 /*
