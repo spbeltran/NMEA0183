@@ -58,14 +58,28 @@ bool GLL::Parse( SENTENCE const& sentence ) noexcept
    **  4) E or W (East or West)
    **  5) Universal Time Coordinated (UTC)
    **  6) Status A - Data Valid, V - Data Invalid
-   **  7) Checksum
+   **  7) FAA Mode (version 2.3)
+   **  8) Checksum
    */
 
    /*
    ** First we check the checksum...
    */
 
-   if ( sentence.IsChecksumBad( 7 ) == NMEA0183_BOOLEAN::True )
+    int checksum_field{ 7 };
+
+   // Version 2.3 of the standard has things different
+
+    FAAMode = sentence.FAAMode(7);
+
+   if (FAAMode != FAA_MODE::ModeUnknown)
+   {
+       checksum_field = 8;
+   }
+
+   auto const check{ sentence.IsChecksumBad(checksum_field) };
+
+   if (check == NMEA0183_BOOLEAN::True )
    {
        SetErrorMessage(STRING_VIEW("Invalid Checksum"));
        return( false );

@@ -48,6 +48,7 @@ class GLL : public RESPONSE
       time_t           Time{ 0 };
       NMEA0183_BOOLEAN IsDataValid{ NMEA0183_BOOLEAN::NMEA_Unknown };
       LATLONG          Position;
+      FAA_MODE         FAAMode{ FAA_MODE::ModeUnknown };
 
       /*
       ** Methods
