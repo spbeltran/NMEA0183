@@ -21,7 +21,7 @@ r_wildcard				=	$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call r_wildcard,$
 relpath					=	$(1:$(CURDIR)/%=./%)
 
 ## Create a target to install a certain file: File $1 will be installed on path $2
-t_install_file			=	$2/$(notdir $1) : $1 ; @ echo "Installing $$<"; mkdir -p $$(dir $$@); install $$< $$@
+t_install_file			=	$1 : $(subst $3,$2,$1) ; @ echo "Installing $$<"; mkdir -p $$(dir $$@); install $$< $$@
 
 ## ==========================================================
 ## Configuration
@@ -113,14 +113,18 @@ CLEAN.DIR				=	$(CLEAN.DIR.msg)			$(CLEAN.DIR.pre)			$(CLEAN.DIR.act)
 ## ==========================================================
 
 ## Paths
+path_include			:=	$(CURDIR)
+path_src				:=	$(CURDIR)
 path_build				:=	$(CURDIR)/build
 path_build_bin			:=	$(path_build)/bin
 path_build_lib			:=	$(path_build)/lib
 path_build_obj			:=	$(path_build)/obj
 path_build_dep			:=	$(path_build_obj)/.dep
 path_build_include		:=	$(path_build)/include
-path_include			:=	$(CURDIR)
-path_src				:=	$(CURDIR)
+path_dest				:=	$(DESTDIR)
+path_dest_bin			:=	$(path_dest)/bin
+path_dest_lib			:=	$(path_dest)/lib
+path_dest_include		:=	$(path_dest)/include/nmea0183
 
 ## General
 name					=	nmea0183
@@ -133,16 +137,25 @@ config					=	$(path_build)/.$(BUILD)
 
 ## nmea0183
 nmea0183.path_src		:=	$(path_src)
+nmea0183.path_include	:=	$(path_include)
 nmea0183.target			:=	$(target)
-#nmea0183.cpps			:=	$(call r_wildcard,$(nmea0183.path_src),*.CPP)
 nmea0183.cpps			=	$(wildcard $(nmea0183.path_src)/*.CPP)
+nmea0183.hpps			:=	$(wildcard $(nmea0183.path_include)/*.HPP)
+nmea0183.hpps			+=	$(wildcard $(nmea0183.path_include)/*.hpp)
+nmea0183.hpps			+=	$(wildcard $(nmea0183.path_include)/*.h)
 nmea0183.objs			:=	$(nmea0183.cpps:$(nmea0183.path_src)/%.CPP=$(path_build_obj)/%.so.o)
 nmea0183.deps			:=	$(nmea0183.cpps:$(nmea0183.path_src)/%.CPP=$(path_build_dep)/%.d)
+nmea0183.dest_hs		:=	$(nmea0183.hpps:$(nmea0183.path_include)/%=$(path_dest_include)/%)
+nmea0183.dest_so		:=	$(nmea0183.target:$(path_build_lib)/%=$(path_dest_lib)/%)
 
 .PHONY					:	nmea0183 nmea0183-clean
 nmea0183				:	$(nmea0183.target)
 $(nmea0183.target)		:	$(nmea0183.objs)
 nmea0183-clean			:	$(addsuffix .clean,$(nmea0183.target) $(nmea0183.objs) $(nmea0183.deps))
+nmea0183-install		:	$(nmea0183.dest_hs) $(nmea0183.dest_so)
+$(foreach file,$(nmea0183.dest_hs),$(eval $(call t_install_file,$(file),$(nmea0183.path_include),$(path_dest_include))))
+$(foreach file,$(nmea0183.dest_so),$(eval $(call t_install_file,$(file),$(path_build_lib),$(path_dest_lib))))
+nmea0183-uninstall		:	$(addsuffix .clean,$(nmea0183.dest_hs) $(nmea0183.dest_so))
 
 -include $(nmea0183.deps)
 
@@ -166,8 +179,10 @@ $(path_build_bin)/%.exe	:							;	@ $(strip $(LINK.EXE))
 .PHONY					:	all fast clean distclean mrproper
 all						:	$(config) $(name)		;	@ echo "Finished updating file '$(name)' in '$(BUILD)' mode."
 fast					:							;	@ $(MAKE) -s -j$(n_cores) all
+install					:	$(name)-install
+uninstall				:	$(name)-uninstall
 clean					:	$(name)-clean
-distclean				:	clean
+distclean				:	uninstall clean
 mrproper				:	distclean config.mk.clean $(path_build).rclean
 
 $(dir $(config)).debug	:;	@ $(MAKE) -s mrproper	;	$(strip $(TOUCH.FILE))
