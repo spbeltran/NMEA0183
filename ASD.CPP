@@ -31,9 +31,13 @@ SOFTWARE.
 // SPDX-License-Identifier: MIT
 
 #include "nmea0183.h"
+#ifdef _WIN32
 #pragma hdrstop
+#endif
 
+#ifdef _WIN32
 #pragma warning( disable : 4100 )
+#endif
 
 bool ASD::Parse( SENTENCE const& ) noexcept
 {
@@ -52,7 +56,9 @@ void ASD::Empty(void) noexcept
 {
 }
 
+#ifdef _WIN32
 #pragma warning( default : 4100 )
+#endif
 
 bool ASD::Write( SENTENCE& sentence ) const noexcept
 {

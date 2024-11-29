@@ -31,7 +31,9 @@ SOFTWARE.
 // SPDX-License-Identifier: MIT
 
 #include "nmea0183.h"
+#ifdef _WIN32
 #pragma hdrstop
+#endif
 
 void GSV::Empty( void ) noexcept
 {
@@ -95,7 +97,7 @@ bool GSV::Parse( SENTENCE const& sentence ) noexcept
    {
       auto const array_index = ((message_number - 1) * 4) + index;
 
-      if (array_index < std::size(SatellitesInView))
+      if (array_index < (int)std::size(SatellitesInView))
       {
           SatellitesInView[array_index].Parse((index * 4) + 4, sentence);
       }

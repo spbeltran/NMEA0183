@@ -469,40 +469,5 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,c++,cmake
 
 ### Specific project files
-# Do not ignore any 3rdparty files
-!/3rdparty/**
-*vcxproj.user
-
 # Ignore auto generated folders
-!/bin/
-/bin/**
-/doxygen/**
-/include/**
-!/lib/
-/lib/**
-/obj/**
-
-# Do not ignore binary files
-!*.dll
-!*.exe
-!*.lib
-!*.pdb
-
-# Do not ignore non auto generated include files
-!/include/synnect/
-!/include/synnect/node/
-!/include/synnect/node/**
-!/include/synnect/sdk/
-!/include/synnect/sdk/**
-
-# Ignore auto generated include files
-/include/synnect/sdk/internal/**
-
-# Ignore auto generated binary files
-/bin/libcrypto-1_1-x64.*
-/bin/liblo.*
-/bin/synnode.*
-/lib/ccl_lib*_x64.*
-/lib/libcrypto.*
-/lib/liblo.*
-/lib/synnlib.*
+/build/

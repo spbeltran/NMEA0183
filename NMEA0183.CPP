@@ -31,7 +31,9 @@ SOFTWARE.
 // SPDX-License-Identifier: MIT
 
 #include "nmea0183.h"
+#ifdef _WIN32
 #pragma hdrstop
+#endif
 
 static inline bool is_less_than(RESPONSE const * left, RESPONSE const * right) noexcept
 {
@@ -257,6 +259,8 @@ void NMEA0183::GetSentence(std::string& destination) const noexcept
     destination = m_Sentence;
 }
 
+#include <time.h>
+
 time_t ctime(int const year, int const month, int const day, int const hour, int const minute, int const second) noexcept
 {
     struct tm gtime;
@@ -271,5 +275,9 @@ time_t ctime(int const year, int const month, int const day, int const hour, int
     gtime.tm_yday = 0;
     gtime.tm_isdst = 0;
 
+#ifdef _WIN32
     return(_mkgmtime(&gtime));
+#else
+    return(timegm(&gtime));
+#endif
 }

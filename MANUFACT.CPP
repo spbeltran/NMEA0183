@@ -31,7 +31,9 @@ SOFTWARE.
 // SPDX-License-Identifier: MIT
 
 #include "nmea0183.h"
+#ifdef _WIN32
 #pragma hdrstop
+#endif
 
 MANUFACTURER::MANUFACTURER( std::string_view mnemonic, std::string_view company_name )
 {

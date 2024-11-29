@@ -38,108 +38,108 @@ SOFTWARE.
 ** General Purpose Classes
 */
 
-#include "Sentence.hpp"
-#include "Response.hpp"
-#include "LatLong.hpp"
-#include "LoranTD.hpp"
-#include "Manufact.hpp"
-#include "MList.hpp"
-#include "OmegaPar.hpp"
-#include "DeccaLOP.hpp"
-#include "RatioPls.hpp"
-#include "RadarDat.hpp"
-#include "SatDat.hpp"
-#include "FreqMode.hpp"
-#include "WayptLoc.hpp" // Sentence Not Recommended For New Designs
+#include "SENTENCE.HPP"
+#include "RESPONSE.HPP"
+#include "LATLONG.HPP"
+#include "LORANTD.HPP"
+#include "MANUFACT.HPP"
+#include "MLIST.HPP"
+#include "OMEGAPAR.HPP"
+#include "DECCALOP.HPP"
+#include "RATIOPLS.HPP"
+#include "RADARDAT.HPP"
+#include "SATDAT.HPP"
+#include "FREQMODE.HPP"
+#include "WAYPTLOC.HPP" // Sentence Not Recommended For New Designs
 
 /*
 ** Response Classes
 */
 
-#include "AAM.hpp"
-#include "ALM.hpp"
-#include "APB.hpp"
-#include "ASD.hpp"
-#include "BEC.hpp"
-#include "BOD.hpp"
-#include "BWC.hpp"
-#include "BWR.hpp"
-#include "BWW.hpp"
-#include "DBT.hpp"
-#include "DCN.hpp"
-#include "DPT.hpp"
-#include "FSI.hpp"
-#include "GDA.hpp" // Sentence Not Recommended For New Designs
-#include "GDF.hpp" // Sentence Not Recommended For New Designs
-#include "GDP.hpp" // Sentence Not Recommended For New Designs
-#include "GGA.hpp"
-#include "GLA.hpp" // Sentence Not Recommended For New Designs
-#include "GLC.hpp"
-#include "GLF.hpp" // Sentence Not Recommended For New Designs
-#include "GLL.hpp"
-#include "GLP.hpp" // Sentence Not Recommended For New Designs
-#include "GOA.hpp" // Sentence Not Recommended For New Designs
-#include "GOF.hpp" // Sentence Not Recommended For New Designs
-#include "GOP.hpp" // Sentence Not Recommended For New Designs
-#include "GSA.hpp"
-#include "GSV.hpp"
-#include "GTD.hpp" // Sentence Not Recommended For New Designs
-#include "GXA.hpp"
-#include "GXF.hpp" // Sentence Not Recommended For New Designs
-#include "GXP.hpp" // Sentence Not Recommended For New Designs
-#include "HCC.hpp" // Sentence Not Recommended For New Designs
-#include "HDG.hpp"
-#include "HDM.hpp" // Sentence Not Recommended For New Designs
-#include "HDT.hpp"
-#include "HSC.hpp"
-#include "IMA.hpp" // Sentence Not Recommended For New Designs
-#include "LCD.hpp"
-#include "MHU.hpp" // Sentence Not Recommended For New Designs
-#include "MTA.hpp" // Sentence Not Recommended For New Designs
-#include "MTW.hpp"
-#include "MWV.hpp"
-#include "OLN.hpp"
-#include "OSD.hpp"
-#include "P.hpp"
-#include "RMA.hpp"
-#include "RMB.hpp"
-#include "RMC.hpp"
-#include "ROT.hpp"
-#include "RPM.hpp"
-#include "RSA.hpp"
-#include "RSD.hpp"
-#include "RTE.hpp"
-#include "SFI.hpp"
-#include "STN.hpp"
-#include "TEP.hpp" // Sentence Not Recommended For New Designs
-#include "TRF.hpp"
-#include "TTM.hpp"
-#include "VBW.hpp"
-#include "VDR.hpp"
-#include "VHW.hpp"
-#include "VLW.hpp"
-#include "VPW.hpp"
-#include "VTG.hpp"
-#include "VWE.hpp" // Sentence Not Recommended For New Designs
-#include "WCV.hpp"
-#include "WDC.hpp" // Sentence Not Recommended For New Designs
-#include "WDR.hpp" // Sentence Not Recommended For New Designs
-#include "WNC.hpp"
-#include "WPL.hpp"
-#include "XDR.hpp"
-#include "XTE.hpp"
-#include "XTR.hpp"
-#include "ZDA.hpp"
-#include "ZFI.hpp" // Sentence Not Recommended For New Designs
-#include "ZFO.hpp" 
-#include "ZLZ.hpp" // Sentence Not Recommended For New Designs
-#include "ZPI.hpp" // Sentence Not Recommended For New Designs
-#include "ZTA.hpp" // Sentence Not Recommended For New Designs
-#include "ZTE.hpp" // Sentence Not Recommended For New Designs
-#include "ZTG.hpp"
-#include "ZTI.hpp" // Sentence Not Recommended For New Designs
-#include "ZWP.hpp" // Sentence Not Recommended For New Designs
-#include "ZZU.hpp" // Sentence Not Recommended For New Designs
+#include "AAM.HPP"
+#include "ALM.HPP"
+#include "APB.HPP"
+#include "ASD.HPP"
+#include "BEC.HPP"
+#include "BOD.HPP"
+#include "BWC.HPP"
+#include "BWR.HPP"
+#include "BWW.HPP"
+#include "DBT.HPP"
+#include "DCN.HPP"
+#include "DPT.HPP"
+#include "FSI.HPP"
+#include "GDA.HPP" // Sentence Not Recommended For New Designs
+#include "GDF.HPP" // Sentence Not Recommended For New Designs
+#include "GDP.HPP" // Sentence Not Recommended For New Designs
+#include "GGA.HPP"
+#include "GLA.HPP" // Sentence Not Recommended For New Designs
+#include "GLC.HPP"
+#include "GLF.HPP" // Sentence Not Recommended For New Designs
+#include "GLL.HPP"
+#include "GLP.HPP" // Sentence Not Recommended For New Designs
+#include "GOA.HPP" // Sentence Not Recommended For New Designs
+#include "GOF.HPP" // Sentence Not Recommended For New Designs
+#include "GOP.HPP" // Sentence Not Recommended For New Designs
+#include "GSA.HPP"
+#include "GSV.HPP"
+#include "GTD.HPP" // Sentence Not Recommended For New Designs
+#include "GXA.HPP"
+#include "GXF.HPP" // Sentence Not Recommended For New Designs
+#include "GXP.HPP" // Sentence Not Recommended For New Designs
+#include "HCC.HPP" // Sentence Not Recommended For New Designs
+#include "HDG.HPP"
+#include "HDM.HPP" // Sentence Not Recommended For New Designs
+#include "HDT.HPP"
+#include "HSC.HPP"
+#include "IMA.HPP" // Sentence Not Recommended For New Designs
+#include "LCD.HPP"
+#include "MHU.HPP" // Sentence Not Recommended For New Designs
+#include "MTA.HPP" // Sentence Not Recommended For New Designs
+#include "MTW.HPP"
+#include "MWV.HPP"
+#include "OLN.HPP"
+#include "OSD.HPP"
+#include "P.HPP"
+#include "RMA.HPP"
+#include "RMB.HPP"
+#include "RMC.HPP"
+#include "ROT.HPP"
+#include "RPM.HPP"
+#include "RSA.HPP"
+#include "RSD.HPP"
+#include "RTE.HPP"
+#include "SFI.HPP"
+#include "STN.HPP"
+#include "TEP.HPP" // Sentence Not Recommended For New Designs
+#include "TRF.HPP"
+#include "TTM.HPP"
+#include "VBW.HPP"
+#include "VDR.HPP"
+#include "VHW.HPP"
+#include "VLW.HPP"
+#include "VPW.HPP"
+#include "VTG.HPP"
+#include "VWE.HPP" // Sentence Not Recommended For New Designs
+#include "WCV.HPP"
+#include "WDC.HPP" // Sentence Not Recommended For New Designs
+#include "WDR.HPP" // Sentence Not Recommended For New Designs
+#include "WNC.HPP"
+#include "WPL.HPP"
+#include "XDR.HPP"
+#include "XTE.HPP"
+#include "XTR.HPP"
+#include "ZDA.HPP"
+#include "ZFI.HPP" // Sentence Not Recommended For New Designs
+#include "ZFO.HPP" 
+#include "ZLZ.HPP" // Sentence Not Recommended For New Designs
+#include "ZPI.HPP" // Sentence Not Recommended For New Designs
+#include "ZTA.HPP" // Sentence Not Recommended For New Designs
+#include "ZTE.HPP" // Sentence Not Recommended For New Designs
+#include "ZTG.HPP"
+#include "ZTI.HPP" // Sentence Not Recommended For New Designs
+#include "ZWP.HPP" // Sentence Not Recommended For New Designs
+#include "ZZU.HPP" // Sentence Not Recommended For New Designs
 
 class NMEA0183
 {

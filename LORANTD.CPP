@@ -31,7 +31,9 @@ SOFTWARE.
 // SPDX-License-Identifier: MIT
 
 #include "nmea0183.h"
+#ifdef _WIN32
 #pragma hdrstop
+#endif
 
 void LORAN_TIME_DIFFERENCE::Empty( void ) noexcept
 {

@@ -31,7 +31,9 @@ SOFTWARE.
 // SPDX-License-Identifier: MIT
 
 #include "nmea0183.h"
+#ifdef _WIN32
 #pragma hdrstop
+#endif
 
 NMEA0183_BOOLEAN SENTENCE::Boolean( int field_number ) const noexcept
 {

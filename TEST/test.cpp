@@ -29,7 +29,9 @@ SOFTWARE.
 */
 
 #include "../nmea0183.h"
+#ifdef _WIN32
 #pragma hdrstop
+#endif
 
 #if defined( _DEBUG )
 #pragma comment( lib, "../x64/Debug/nmea0183.lib" )

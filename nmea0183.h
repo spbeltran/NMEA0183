@@ -47,6 +47,7 @@ SOFTWARE.
 #include <math.h>
 #include <time.h>
 #include <inttypes.h>
+#include <tuple>
 
 #define STRING_VIEW(_x)  std::string_view(  _x, std::size(_x) - 1)
 
@@ -54,7 +55,9 @@ SOFTWARE.
 ** Turn off the warning about precompiled headers, it is rather annoying
 */
 
+#ifdef _WIN32
 #pragma warning( disable : 4699 )
+#endif
 
 #if ! defined( CARRIAGE_RETURN )
 #define CARRIAGE_RETURN (0x0D)

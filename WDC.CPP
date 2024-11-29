@@ -36,7 +36,9 @@ SOFTWARE.
 */
 
 #include "nmea0183.h"
+#ifdef _WIN32
 #pragma hdrstop
+#endif
 
 void WDC::Empty( void ) noexcept
 {
