@@ -136,6 +136,14 @@ uint8_t SENTENCE::ComputeChecksum( void ) const noexcept
    return( checksum_value );
 }
 
+namespace fallback {
+   std::false_type from_chars(...) {return {};}
+   template <typename T, typename R = decltype(from_chars(std::declval<const char* const>(), std::declval<const char* const>(), std::declval<double&>(), std::declval<const std::chars_format>()))>
+   using ret_from_chars = R;
+}
+
+using has_from_chars = std::conditional_t<std::is_same_v<fallback::ret_from_chars<std::true_type>, std::false_type>, std::false_type, std::true_type>;
+
 double SENTENCE::Double( int field_number ) const noexcept
 {
    auto field_data{ Field(field_number) };
@@ -147,7 +155,13 @@ double SENTENCE::Double( int field_number ) const noexcept
 
    double return_value{ 0.0 };
 
-   std::ignore = std::from_chars(&field_data[0], &field_data[0] + field_data.length(), return_value);
+   if constexpr (has_from_chars::value) {
+       using namespace std;
+       using namespace fallback;
+       std::ignore = from_chars(&field_data[0], &field_data[0] + field_data.length(), return_value);
+   } else {
+       return_value = std::strtod(std::string(field_data).c_str(), nullptr);
+   }
 
    return(return_value);
 }
