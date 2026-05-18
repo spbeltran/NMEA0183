@@ -42,7 +42,7 @@ SOFTWARE.
 class GXP : public WAYPOINT_LOCATION
 {
    public:
-
+      using WAYPOINT_LOCATION::operator=;
       inline GXP() noexcept : WAYPOINT_LOCATION(STRING_VIEW("GXP")) {}
 };
 

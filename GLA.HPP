@@ -42,7 +42,7 @@ SOFTWARE.
 class GLA : public WAYPOINT_LOCATION
 {
    public:
-
+      using WAYPOINT_LOCATION::operator=;
       inline GLA() noexcept : WAYPOINT_LOCATION(STRING_VIEW("GLA")) {}
 };
 

@@ -42,7 +42,7 @@ SOFTWARE.
 class GOP : public WAYPOINT_LOCATION
 {
    public:
-
+      using WAYPOINT_LOCATION::operator=;
       inline GOP() noexcept : WAYPOINT_LOCATION(STRING_VIEW("GOP")) {}
 };
 

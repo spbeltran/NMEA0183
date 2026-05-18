@@ -42,7 +42,7 @@ SOFTWARE.
 class GDA : public WAYPOINT_LOCATION
 {
    public:
-
+       using WAYPOINT_LOCATION::operator=;
        inline GDA() noexcept : WAYPOINT_LOCATION(STRING_VIEW("GDA")) {}
 };
 

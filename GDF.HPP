@@ -42,7 +42,7 @@ SOFTWARE.
 class GDF : public WAYPOINT_LOCATION
 {
    public:
-
+      using WAYPOINT_LOCATION::operator=;
       inline GDF() noexcept : WAYPOINT_LOCATION(STRING_VIEW("GDF")) {};
 };
 

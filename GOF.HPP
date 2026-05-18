@@ -42,7 +42,7 @@ SOFTWARE.
 class GOF : public WAYPOINT_LOCATION
 {
    public:
-
+      using WAYPOINT_LOCATION::operator=;
       inline GOF() noexcept : WAYPOINT_LOCATION(STRING_VIEW("GOF")) {}
 };
 

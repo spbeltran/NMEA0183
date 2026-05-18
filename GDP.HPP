@@ -42,7 +42,7 @@ SOFTWARE.
 class GDP : public WAYPOINT_LOCATION
 {
    public:
-
+      using WAYPOINT_LOCATION::operator=;
       inline GDP() noexcept : WAYPOINT_LOCATION(STRING_VIEW("GDP")) {}
 };
 
